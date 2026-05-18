@@ -4,293 +4,300 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1B4332">
-<title>Celeste Living Group — Curated Property & Investor Partnerships in Birmingham & Staffordshire</title>
-<meta name="description" content="Celeste Living Group sources honest, stackable property deals across Birmingham and Staffordshire. Founded by Bruno & Kirstie — a fiancé & fiancée team building a property business the right way.">
-<meta property="og:title" content="Celeste Living Group — Curated Living & Experiences">
-<meta property="og:description" content="Honest deal sourcing and property flips across Birmingham & Staffordshire. No hype. No inflated numbers. Long-term partnerships only.">
+<title>Celeste Living Group — Coming Soon</title>
+<meta name="description" content="Celeste Living Group — curated living &amp; experiences. Property deal sourcing and flips in Birmingham &amp; Staffordshire. Our website is on its way.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Celeste Living Group — Coming Soon">
+<meta property="og:description" content="Curated living &amp; experiences. Property deal sourcing and flips in Birmingham &amp; Staffordshire.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://celestelivinggroup.co.uk">
-<meta property="og:image" content="https://celestelivinggroup.co.uk/assets/logo.svg">
 <link rel="icon" type="image/svg+xml" href="assets/mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+<style>
+  :root {
+    --forest-900: #0B2218;
+    --forest-700: #1B4332;
+    --forest-600: #2D6A4F;
+    --sage-300: #95D5B2;
+    --sage-100: #D8F3DC;
+    --cream-50: #FBF9F4;
+    --cream-100: #F7F4ED;
+    --cream-200: #EFEBDF;
+    --ink-700: #3B3F38;
+    --ink-500: #6C7268;
+    --line: rgba(27, 67, 50, 0.16);
+    --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: var(--font-body);
+    color: var(--forest-900);
+    background: var(--cream-100);
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(900px 600px at 85% -10%, rgba(45,106,79,.10), transparent 60%),
+      radial-gradient(800px 500px at -10% 110%, rgba(149,213,178,.20), transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(27,67,50,0.06) 1px, transparent 0);
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(40px, 8vw, 80px) clamp(24px, 5vw, 64px);
+    position: relative;
+    z-index: 1;
+  }
+  .stack {
+    width: 100%;
+    max-width: 640px;
+    text-align: center;
+    animation: fadeUp 1s var(--ease) both;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 12px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--forest-600);
+    font-weight: 600;
+    margin-bottom: 36px;
+  }
+  .eyebrow::before,
+  .eyebrow::after {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: var(--forest-600);
+    display: inline-block;
+  }
+  .logo {
+    width: clamp(180px, 26vw, 260px);
+    height: auto;
+    margin: 0 auto 28px;
+    display: block;
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    color: var(--forest-700);
+    line-height: 1;
+  }
+  .wordmark__name {
+    display: block;
+    font-size: clamp(48px, 9vw, 88px);
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .wordmark__sub {
+    display: block;
+    font-size: clamp(16px, 2.2vw, 24px);
+    letter-spacing: 0.32em;
+    margin-top: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  .divider {
+    width: 200px;
+    max-width: 60%;
+    height: 1px;
+    background: var(--forest-700);
+    opacity: 0.4;
+    margin: 28px auto;
+  }
+  .tagline {
+    font-family: var(--font-body);
+    font-size: clamp(12px, 1.6vw, 14px);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--forest-600);
+    font-weight: 500;
+  }
+  .headline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(22px, 3.4vw, 34px);
+    line-height: 1.3;
+    color: var(--forest-900);
+    margin-top: 56px;
+    max-width: 22ch;
+    margin-inline: auto;
+  }
+  .message {
+    color: var(--ink-700);
+    font-size: clamp(15px, 1.5vw, 17px);
+    line-height: 1.65;
+    margin-top: 20px;
+    max-width: 44ch;
+    margin-inline: auto;
+  }
+  .contact {
+    margin-top: 56px;
+    display: grid;
+    gap: 16px;
+    justify-content: center;
+  }
+  .contact-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 28px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--forest-900);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: transform .35s var(--ease), background .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease);
+    min-width: 280px;
+    justify-content: flex-start;
+  }
+  .contact-card:hover {
+    transform: translateY(-2px);
+    background: var(--forest-700);
+    color: var(--cream-100);
+    border-color: var(--forest-700);
+    box-shadow: 0 18px 40px -22px rgba(27, 67, 50, 0.6);
+  }
+  .contact-card__icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    background: var(--sage-100);
+    color: var(--forest-800, var(--forest-700));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background .35s var(--ease), color .35s var(--ease);
+  }
+  .contact-card:hover .contact-card__icon {
+    background: var(--cream-100);
+    color: var(--forest-900);
+  }
+  .contact-card__label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--forest-600);
+    font-weight: 600;
+    margin-bottom: 2px;
+    transition: color .35s var(--ease);
+  }
+  .contact-card:hover .contact-card__label { color: var(--sage-300); }
+  .contact-card__value {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  footer {
+    padding: 28px 24px 36px;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    z-index: 1;
+    position: relative;
+  }
+  footer .yr { color: var(--forest-700); font-weight: 600; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stack { animation: none; }
+  }
+</style>
 </head>
 <body>
 
-<header class="site-header" id="site-header">
-  <div class="container">
-    <nav class="nav" id="nav">
-      <a href="index.html" class="nav__brand" aria-label="Celeste Living Group — home">
-        <img src="assets/mark.svg" alt="" aria-hidden="true">
-        <span>Celeste<small>Living Group</small></span>
+<main>
+  <div class="stack">
+    <span class="eyebrow">Coming soon</span>
+
+    <div class="wordmark" role="img" aria-label="Celeste Living Group">
+      <span class="wordmark__name">Celeste</span>
+      <span class="wordmark__sub">Living Group</span>
+    </div>
+
+    <div class="divider" aria-hidden="true"></div>
+    <p class="tagline">Curated Living &amp; Experiences</p>
+
+    <h1 class="headline">Something considered is on its way.</h1>
+    <p class="message">Our website is being finished — properly, not quickly. In the meantime, we'd love to hear from you. Get in touch and we'll reply personally.</p>
+
+    <div class="contact">
+      <a class="contact-card" href="tel:+441217989081" aria-label="Call us on 0121 798 9081">
+        <span class="contact-card__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </span>
+        <span>
+          <span class="contact-card__label">Phone</span>
+          <span class="contact-card__value">0121 798 9081</span>
+        </span>
       </a>
-      <div class="nav__links">
-        <a href="index.html" class="is-active">Home</a>
-        <a href="about.html">About</a>
-        <a href="customer-journey.html">How we work</a>
-        <a href="compliance.html">Compliance</a>
-        <a href="contact.html">Contact</a>
-      </div>
-      <a href="contact.html" class="btn btn--primary nav__cta">Work with us <span class="arrow">&rarr;</span></a>
-      <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span></button>
-    </nav>
-  </div>
-</header>
 
-<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-  <a href="index.html">Home</a>
-  <a href="about.html">About</a>
-  <a href="customer-journey.html">How we work</a>
-  <a href="compliance.html">Compliance</a>
-  <a href="contact.html">Contact</a>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="container">
-    <div class="hero__grid">
-      <div class="reveal">
-        <span class="eyebrow">Birmingham &middot; Staffordshire</span>
-        <h1 class="mt-sm">Honest property.<br><span class="serif-it">Considered</span> partnerships.</h1>
-        <p class="lead mt-md">We source deals and run property flips with the patience of people playing the long game — because that's exactly what we are. No inflated numbers. No guru language. If a deal doesn't stack, we walk.</p>
-        <div class="mt-lg" style="display:flex; gap:14px; flex-wrap:wrap;">
-          <a href="customer-journey.html" class="btn btn--primary">See how we work <span class="arrow">&rarr;</span></a>
-          <a href="about.html" class="btn btn--ghost">Meet Bruno &amp; Kirstie</a>
-        </div>
-        <div class="hero__meta">
-          <div>
-            <strong>2</strong><span>Founders, one vision</span>
-          </div>
-          <div>
-            <strong>100%</strong><span>Honest sourcing</span>
-          </div>
-          <div>
-            <strong>B'ham &amp; Staffs</strong><span>Focus areas</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero__visual reveal">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="Interior of a renovated home with considered finishes" loading="eager">
-        <p class="badge">Every project<br>done <em>properly</em></p>
-      </div>
+      <a class="contact-card" href="mailto:info@celestelivinggroup.co.uk" aria-label="Email info@celestelivinggroup.co.uk">
+        <span class="contact-card__icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </span>
+        <span>
+          <span class="contact-card__label">Email</span>
+          <span class="contact-card__value">info@celestelivinggroup.co.uk</span>
+        </span>
+      </a>
     </div>
   </div>
+</main>
 
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span>Deal sourcing</span><span>Property flips</span><span>Investor partnerships</span><span>Birmingham</span><span>Staffordshire</span><span>Long-term thinking</span>
-      <span>Deal sourcing</span><span>Property flips</span><span>Investor partnerships</span><span>Birmingham</span><span>Staffordshire</span><span>Long-term thinking</span>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT WE DO -->
-<section>
-  <div class="container">
-    <div class="split w-35">
-      <div class="reveal">
-        <span class="eyebrow">What we do</span>
-        <h2 class="mt-sm">Two strands. One standard.</h2>
-        <p class="mt-md">We find property deals that stack — and we run flips where the finish people expect as an upgrade is simply our baseline. Whether you're an investor looking for a sourced opportunity or a partner looking at a completed flip, the bar doesn't change.</p>
-      </div>
-      <div class="grid-3 reveal" style="grid-template-columns:1fr;">
-        <article class="card">
-          <span class="card__num">01</span>
-          <h3>Deal sourcing</h3>
-          <p>Compliant, bespoke sourcing across Birmingham and Staffordshire. We know the streets, the pricing nuance, and when to walk away — which happens more often than most sourcers admit.</p>
-        </article>
-        <article class="card">
-          <span class="card__num">02</span>
-          <h3>Property flips</h3>
-          <p>Select flips with a high-end finish as standard. We plan the exit before we buy the entry, and we'd rather do fewer, better projects than churn through quick-margin compromises.</p>
-        </article>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRINCIPLES -->
-<section class="principles">
-  <div class="container">
-    <div style="max-width:56ch;">
-      <span class="eyebrow">Our principles</span>
-      <h2 class="mt-sm">Six commitments we won't move on.</h2>
-      <p class="mt-md">These aren't tagline words. They're how we'll behave on the boring Tuesdays when nobody's watching.</p>
-    </div>
-
-    <div class="mt-lg">
-      <div class="value-row reveal">
-        <span class="value-row__num">i</span>
-        <div>
-          <h3>Honesty over hype</h3>
-          <p>No inflated numbers. No unrealistic promises. If a deal doesn't stack on real figures, it doesn't get forwarded, no matter how much we'd like the fee.</p>
-        </div>
-      </div>
-      <div class="value-row reveal">
-        <span class="value-row__num">ii</span>
-        <div>
-          <h3>Relationships first</h3>
-          <p>This is a people business. Investors, sourcers and trades are long-term partners — not transactions to close and move on from.</p>
-        </div>
-      </div>
-      <div class="value-row reveal">
-        <span class="value-row__num">iii</span>
-        <div>
-          <h3>Communication is everything</h3>
-          <p>Clear, consistent and proactive. You shouldn't have to chase us for an update, and you shouldn't get a different answer depending on which of us you ask.</p>
-        </div>
-      </div>
-      <div class="value-row reveal">
-        <span class="value-row__num">iv</span>
-        <div>
-          <h3>High standards as baseline</h3>
-          <p>High-end finish isn't an upgrade — it's the floor. Every project gets the spec we'd want if we were moving in ourselves.</p>
-        </div>
-      </div>
-      <div class="value-row reveal">
-        <span class="value-row__num">v</span>
-        <div>
-          <h3>Local &amp; loyal</h3>
-          <p>Focused on areas we actually know — Birmingham and Staffordshire — and building a trusted local network of trades and professionals over the long term.</p>
-        </div>
-      </div>
-      <div class="value-row reveal">
-        <span class="value-row__num">vi</span>
-        <div>
-          <h3>Early stage, serious intent</h3>
-          <p>We're at the beginning of this journey — and we're not pretending otherwise. What we bring is preparation, real-world business experience, and the intention to be here in twenty years.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- IMAGE / QUOTE -->
-<section>
-  <div class="container">
-    <div class="split">
-      <div class="feature-image reveal">
-        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1400&q=80" alt="A Birmingham terrace being refurbished" loading="lazy">
-      </div>
-      <div class="reveal">
-        <span class="eyebrow">The Celeste way</span>
-        <h2 class="mt-sm" style="font-size:clamp(28px,3.2vw,46px); line-height:1.12;">
-          <span class="script">&ldquo;</span>We won't be the loudest in the room. We'd rather be the people you'd be happy to back on the deal after next.<span class="script">&rdquo;</span>
-        </h2>
-        <p class="mt-md">Property is long. So are the relationships that make it work. Our job is to keep both in good shape — which starts with being clear about what we are, what we're not, and what you can expect from us.</p>
-        <a href="about.html" class="btn btn--ghost mt-md">Our story <span class="arrow">&rarr;</span></a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS (preview) -->
-<section class="principles">
-  <div class="container">
-    <div class="split w-55">
-      <div class="reveal">
-        <span class="eyebrow">How we work</span>
-        <h2 class="mt-sm">A clear four-step path, without the fluff.</h2>
-        <p class="mt-md">Every partnership starts with a proper introduction — not a hard sell. Here's the short version. The longer version lives on the <a href="customer-journey.html" style="color:var(--forest-700); text-decoration:underline; text-decoration-color:var(--sage-300); text-underline-offset:4px;">how we work</a> page.</p>
-      </div>
-      <div class="steps reveal">
-        <div class="step">
-          <div class="step__num">01 <span>Intro call</span></div>
-          <div>
-            <h3>Get to know each other</h3>
-            <p>A relaxed 30-minute conversation. What are you looking for, what are we working on, and is there a fit worth exploring.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step__num">02 <span>Discovery</span></div>
-          <div>
-            <h3>Your criteria, clearly defined</h3>
-            <p>Budget, strategy, area, timescale and risk appetite — written down, agreed, and used as the filter for every deal we forward.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step__num">03 <span>Onboarding</span></div>
-          <div>
-            <h3>Compliance &amp; paperwork</h3>
-            <p>The proper checks — ID, proof of funds, AML. We'd rather do these properly than cut corners and clean up later.</p>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step__num">04 <span>Deals</span></div>
-          <div>
-            <h3>Opportunities that stack</h3>
-            <p>You see deals that match your criteria, with real figures, honest risks and clear next steps. If there's nothing worth sending, we don't send anything.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div style="text-align:center; margin-top:48px;" class="reveal">
-      <a href="customer-journey.html" class="btn btn--primary">See the full customer journey <span class="arrow">&rarr;</span></a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section>
-  <div class="container">
-    <div class="reveal" style="background:var(--forest-900); color:var(--cream-100); border-radius:var(--radius-lg); padding:clamp(40px, 5vw, 84px); text-align:center; position:relative; overflow:hidden;">
-      <span class="eyebrow" style="color:var(--sage-300);">Start a conversation</span>
-      <h2 style="color:var(--cream-100); margin-top:16px; max-width:20ch; margin-inline:auto;">Ready to see how we work, quietly and properly?</h2>
-      <p style="color:rgba(247,244,237,0.78); margin:20px auto 0; max-width:50ch;">Whether you're an investor, a landlord in transition, or someone exploring their first property partnership — we'd rather have a proper chat than send a brochure.</p>
-      <div style="margin-top:36px; display:flex; gap:14px; flex-wrap:wrap; justify-content:center;">
-        <a href="contact.html" class="btn btn--light">Get in touch</a>
-        <a href="customer-journey.html" class="btn btn--ghost" style="color:var(--cream-100); border-color:rgba(247,244,237,0.4);">Book an intro call</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand">Celeste<small>LIVING GROUP</small></div>
-        <p>Curated living &amp; experiences.<br>Honest property partnerships in Birmingham &amp; Staffordshire.</p>
-      </div>
-      <div>
-        <h4>Explore</h4>
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="customer-journey.html">How we work</a></li>
-          <li><a href="compliance.html">Compliance</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="mailto:info@celestelivinggroup.co.uk">info@celestelivinggroup.co.uk</a></li>
-          <li>Birmingham &amp; Staffordshire, UK</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Follow</h4>
-        <ul>
-          <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
-          <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div>&copy; <span id="yr"></span> Celeste Living Group. All rights reserved.</div>
-      <div style="display:flex; gap:20px; flex-wrap:wrap;">
-        <a href="terms.html">Terms of Business</a>
-        <a href="mailto:info@celestelivinggroup.co.uk">info@celestelivinggroup.co.uk</a>
-      </div>
-    </div>
-  </div>
+<footer>
+  &copy; <span class="yr" id="yr"></span> Celeste Living Group &middot; Birmingham &amp; Staffordshire
 </footer>
 
-<script src="js/main.js"></script>
+<script>
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+
 </body>
 </html>
