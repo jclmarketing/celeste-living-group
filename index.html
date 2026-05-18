@@ -161,15 +161,17 @@
   }
   .contact {
     margin-top: 56px;
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 16px;
-    justify-content: center;
   }
   .contact-card {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 16px;
-    padding: 18px 28px;
+    padding: 18px 32px;
     border: 1px solid var(--line);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.6);
@@ -180,8 +182,8 @@
     font-size: 16px;
     font-weight: 500;
     transition: transform .35s var(--ease), background .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease);
-    min-width: 280px;
-    justify-content: flex-start;
+    min-width: min(320px, 100%);
+    text-align: left;
   }
   .contact-card:hover {
     transform: translateY(-2px);
@@ -259,8 +261,7 @@
     <div class="divider" aria-hidden="true"></div>
     <p class="tagline">Curated Living &amp; Experiences</p>
 
-    <h1 class="headline">Something considered is on its way.</h1>
-    <p class="message">Our website is being finished — properly, not quickly. In the meantime, we'd love to hear from you. Get in touch and we'll reply personally.</p>
+    <p class="message">Our website is being finished properly, not quickly. In the meantime, we'd love to hear from you. Get in touch and we'll reply personally.</p>
 
     <div class="contact">
       <a class="contact-card" href="tel:+441217989081" aria-label="Call us on 0121 798 9081">
