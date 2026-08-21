@@ -5,27 +5,114 @@
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Robots-Tag", "value": "noindex, nofollow" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
       ]
     }
   ],
-  "rewrites": [
-    { "source": "/home", "destination": "/index.html" },
-    { "source": "/about", "destination": "/index.html" },
-    { "source": "/property-management", "destination": "/index.html" },
-    { "source": "/customer-journey", "destination": "/index.html" },
-    { "source": "/how-we-work", "destination": "/index.html" },
-    { "source": "/compliance", "destination": "/index.html" },
-    { "source": "/contact", "destination": "/index.html" },
-    { "source": "/terms", "destination": "/index.html" }
+  "redirects": [
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/home.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/about",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/about.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/property-management",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/property-management.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/customer-journey",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/customer-journey.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/how-we-work",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/how-we-work.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/compliance",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/compliance.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/contact",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/terms",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/terms.html",
+      "destination": "/",
+      "permanent": false
+    }
   ]
 }
