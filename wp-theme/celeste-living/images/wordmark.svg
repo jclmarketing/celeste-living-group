@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 230" fill="none">
+  <text x="300" y="110" text-anchor="middle" fill="#1B4332"
+        font-family="'Cormorant Garamond', 'Playfair Display', Georgia, serif"
+        font-size="110" font-weight="500" letter-spacing="6">CELESTE</text>
+  <text x="300" y="170" text-anchor="middle" fill="#1B4332"
+        font-family="'Cormorant Garamond', 'Playfair Display', Georgia, serif"
+        font-size="38" font-weight="400" letter-spacing="14">LIVING GROUP</text>
+  <line x1="140" y1="195" x2="460" y2="195" stroke="#1B4332" stroke-width="1" opacity="0.5"/>
+  <text x="300" y="220" text-anchor="middle" fill="#2D6A4F"
+        font-family="'Plus Jakarta Sans', system-ui, sans-serif"
+        font-size="16" font-weight="500" letter-spacing="4">CURATED LIVING &amp; EXPERIENCES</text>
+</svg>

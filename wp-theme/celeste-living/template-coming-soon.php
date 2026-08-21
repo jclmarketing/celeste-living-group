@@ -1,16 +1,36 @@
-<!DOCTYPE html>
-<html lang="en-GB">
+<?php
+/**
+ * Template Name: Coming Soon
+ *
+ * Standalone holding page (from the static site's index.html).
+ * To gate the whole site: assign this template to a page and set that page
+ * as the front page under Settings → Reading. All content is editable via
+ * the Coming Soon Content metabox on that page.
+ */
+$pid = get_the_ID();
+$d   = clg_cs_defaults();
+
+$cs_eyebrow     = clg_meta($pid, '_clg_cs_eyebrow', $d['_clg_cs_eyebrow']);
+$cs_tagline     = clg_meta($pid, '_clg_cs_tagline', $d['_clg_cs_tagline']);
+$cs_message     = clg_meta($pid, '_clg_cs_message', $d['_clg_cs_message']);
+$cs_phone_label = clg_meta($pid, '_clg_cs_phone_label', $d['_clg_cs_phone_label']);
+$cs_phone       = clg_meta($pid, '_clg_cs_phone', $d['_clg_cs_phone']);
+$cs_email_label = clg_meta($pid, '_clg_cs_email_label', $d['_clg_cs_email_label']);
+$cs_email       = clg_meta($pid, '_clg_cs_email', $d['_clg_cs_email']);
+$cs_footer      = clg_meta($pid, '_clg_cs_footer_text', $d['_clg_cs_footer_text']);
+
+$cs_brand_name = get_option('clg_brand_name', 'Celeste');
+$cs_brand_sub  = get_option('clg_brand_sub', 'Living Group');
+$cs_phone_href = 'tel:' . preg_replace('/[^0-9+]/', '', '+44' . ltrim(preg_replace('/[^0-9]/', '', $cs_phone), '0'));
+?><!DOCTYPE html>
+<html <?php language_attributes(); ?>>
 <head>
-<meta charset="UTF-8">
+<meta charset="<?php bloginfo('charset'); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1B4332">
-<title>Celeste Living Group — Coming Soon</title>
-<meta name="description" content="Celeste Living Group — curated living &amp; experiences. Property sourcing, flips and management in Birmingham &amp; Staffordshire. Our website is on its way.">
 <meta name="robots" content="noindex, nofollow">
-<meta property="og:title" content="Celeste Living Group — Coming Soon">
-<meta property="og:description" content="Curated living &amp; experiences. Property sourcing, flips and management in Birmingham &amp; Staffordshire.">
-<meta property="og:type" content="website">
-<link rel="icon" type="image/svg+xml" href="assets/mark.svg">
+<title><?php echo esc_html($cs_brand_name . ' ' . $cs_brand_sub); ?> — <?php echo esc_html($cs_eyebrow); ?></title>
+<link rel="icon" type="image/svg+xml" href="<?php echo esc_url(get_template_directory_uri() . '/images/mark.svg'); ?>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -99,12 +119,6 @@
     background: var(--forest-600);
     display: inline-block;
   }
-  .logo {
-    width: clamp(180px, 26vw, 260px);
-    height: auto;
-    margin: 0 auto 28px;
-    display: block;
-  }
   .wordmark {
     font-family: var(--font-display);
     color: var(--forest-700);
@@ -140,16 +154,6 @@
     text-transform: uppercase;
     color: var(--forest-600);
     font-weight: 500;
-  }
-  .headline {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(22px, 3.4vw, 34px);
-    line-height: 1.3;
-    color: var(--forest-900);
-    margin-top: 56px;
-    max-width: 22ch;
-    margin-inline: auto;
   }
   .message {
     color: var(--ink-700);
@@ -251,32 +255,35 @@
 
 <main>
   <div class="stack">
-    <span class="eyebrow">Coming soon</span>
+    <span class="eyebrow"><?php echo esc_html($cs_eyebrow); ?></span>
 
-    <div class="wordmark" role="img" aria-label="Celeste Living Group">
-      <span class="wordmark__name">Celeste</span>
-      <span class="wordmark__sub">Living Group</span>
+    <div class="wordmark" role="img" aria-label="<?php echo esc_attr($cs_brand_name . ' ' . $cs_brand_sub); ?>">
+      <span class="wordmark__name"><?php echo esc_html($cs_brand_name); ?></span>
+      <span class="wordmark__sub"><?php echo esc_html($cs_brand_sub); ?></span>
     </div>
 
     <div class="divider" aria-hidden="true"></div>
-    <p class="tagline">Curated Living &amp; Experiences</p>
+    <p class="tagline"><?php echo esc_html($cs_tagline); ?></p>
 
-    <p class="message">Our website is being finished properly, not quickly. In the meantime, we'd love to hear from you. Get in touch and we'll reply personally.</p>
+    <p class="message"><?php echo clg_rich($cs_message); ?></p>
 
     <div class="contact">
-      <a class="contact-card" href="tel:+441217989081" aria-label="Call us on 0121 798 9081">
+      <?php if ($cs_phone) : ?>
+      <a class="contact-card" href="<?php echo esc_attr($cs_phone_href); ?>" aria-label="Call us on <?php echo esc_attr($cs_phone); ?>">
         <span class="contact-card__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>
           </svg>
         </span>
         <span>
-          <span class="contact-card__label">Phone</span>
-          <span class="contact-card__value">0121 798 9081</span>
+          <span class="contact-card__label"><?php echo esc_html($cs_phone_label); ?></span>
+          <span class="contact-card__value"><?php echo esc_html($cs_phone); ?></span>
         </span>
       </a>
+      <?php endif; ?>
 
-      <a class="contact-card" href="mailto:info@celestelivinggroup.co.uk" aria-label="Email info@celestelivinggroup.co.uk">
+      <?php if ($cs_email) : ?>
+      <a class="contact-card" href="mailto:<?php echo esc_attr($cs_email); ?>" aria-label="Email <?php echo esc_attr($cs_email); ?>">
         <span class="contact-card__icon" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -284,16 +291,17 @@
           </svg>
         </span>
         <span>
-          <span class="contact-card__label">Email</span>
-          <span class="contact-card__value">info@celestelivinggroup.co.uk</span>
+          <span class="contact-card__label"><?php echo esc_html($cs_email_label); ?></span>
+          <span class="contact-card__value"><?php echo esc_html($cs_email); ?></span>
         </span>
       </a>
+      <?php endif; ?>
     </div>
   </div>
 </main>
 
 <footer>
-  &copy; <span class="yr" id="yr"></span> Celeste Living Group &middot; Birmingham &amp; Staffordshire
+  &copy; <span class="yr" id="yr"></span> <?php echo esc_html($cs_footer); ?>
 </footer>
 
 <script>

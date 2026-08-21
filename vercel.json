@@ -21,6 +21,7 @@
   "rewrites": [
     { "source": "/home", "destination": "/index.html" },
     { "source": "/about", "destination": "/index.html" },
+    { "source": "/property-management", "destination": "/index.html" },
     { "source": "/customer-journey", "destination": "/index.html" },
     { "source": "/how-we-work", "destination": "/index.html" },
     { "source": "/compliance", "destination": "/index.html" },

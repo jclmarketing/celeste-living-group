@@ -1,0 +1,162 @@
+<?php
+/**
+ * Template: Contact (from contact.html)
+ * The form posts directly to FormSubmit (plain HTML form — no plugins).
+ */
+get_header();
+$pid = get_the_ID();
+$d   = clg_contact_defaults();
+
+// === Contact methods ===
+$methods_eyebrow = clg_meta($pid, '_clg_contact_methods_eyebrow', $d['_clg_contact_methods_eyebrow']);
+$methods_title   = clg_meta($pid, '_clg_contact_methods_title', $d['_clg_contact_methods_title']);
+$methods_text    = clg_meta($pid, '_clg_contact_methods_text', $d['_clg_contact_methods_text']);
+
+$email_label = clg_meta($pid, '_clg_contact_email_label', $d['_clg_contact_email_label']);
+$email_value = clg_meta($pid, '_clg_contact_email_value', $d['_clg_contact_email_value']);
+$email_note  = clg_meta($pid, '_clg_contact_email_note', $d['_clg_contact_email_note']);
+
+$book_label    = clg_meta($pid, '_clg_contact_book_label', $d['_clg_contact_book_label']);
+$book_title    = clg_meta($pid, '_clg_contact_book_title', $d['_clg_contact_book_title']);
+$book_note     = clg_meta($pid, '_clg_contact_book_note', $d['_clg_contact_book_note']);
+$book_btn_text = clg_meta($pid, '_clg_contact_book_btn_text', $d['_clg_contact_book_btn_text']);
+$book_btn_url  = clg_meta($pid, '_clg_contact_book_btn_url', $d['_clg_contact_book_btn_url']);
+
+$area_label = clg_meta($pid, '_clg_contact_area_label', $d['_clg_contact_area_label']);
+$area_title = clg_meta($pid, '_clg_contact_area_title', $d['_clg_contact_area_title']);
+$area_note  = clg_meta($pid, '_clg_contact_area_note', $d['_clg_contact_area_note']);
+
+// === Form ===
+$form_action    = clg_meta($pid, '_clg_contact_form_action', $d['_clg_contact_form_action']);
+$form_eyebrow   = clg_meta($pid, '_clg_contact_form_eyebrow', $d['_clg_contact_form_eyebrow']);
+$form_title     = clg_meta($pid, '_clg_contact_form_title', $d['_clg_contact_form_title']);
+$form_intro     = clg_meta($pid, '_clg_contact_form_intro', $d['_clg_contact_form_intro']);
+$label_name     = clg_meta($pid, '_clg_contact_label_name', $d['_clg_contact_label_name']);
+$label_email    = clg_meta($pid, '_clg_contact_label_email', $d['_clg_contact_label_email']);
+$label_phone    = clg_meta($pid, '_clg_contact_label_phone', $d['_clg_contact_label_phone']);
+$label_interest = clg_meta($pid, '_clg_contact_label_interest', $d['_clg_contact_label_interest']);
+$label_message  = clg_meta($pid, '_clg_contact_label_message', $d['_clg_contact_label_message']);
+$interest_opts  = clg_list(clg_meta($pid, '_clg_contact_interest_options', $d['_clg_contact_interest_options']));
+$msg_placeholder = clg_meta($pid, '_clg_contact_message_placeholder', $d['_clg_contact_message_placeholder']);
+$form_subject   = clg_meta($pid, '_clg_contact_form_subject', $d['_clg_contact_form_subject']);
+$submit_text    = clg_meta($pid, '_clg_contact_submit_text', $d['_clg_contact_submit_text']);
+$form_note      = clg_meta($pid, '_clg_contact_form_note', $d['_clg_contact_form_note']);
+$form_next      = add_query_arg('sent', '1', get_permalink($pid));
+
+// === Bottom CTA (light) ===
+$cta_eyebrow  = clg_meta($pid, '_clg_contact_cta_eyebrow', $d['_clg_contact_cta_eyebrow']);
+$cta_title    = clg_meta($pid, '_clg_contact_cta_title', $d['_clg_contact_cta_title']);
+$cta_text     = clg_meta($pid, '_clg_contact_cta_text', $d['_clg_contact_cta_text']);
+$cta_btn_text = clg_meta($pid, '_clg_contact_cta_btn_text', $d['_clg_contact_cta_btn_text']);
+$cta_btn_url  = clg_meta($pid, '_clg_contact_cta_btn_url', $d['_clg_contact_cta_btn_url']);
+
+get_template_part('template-parts/page-hero');
+?>
+
+<section>
+  <div class="container">
+    <div class="split w-35">
+      <div class="reveal">
+        <span class="eyebrow"><?php echo esc_html($methods_eyebrow); ?></span>
+        <h2 class="mt-sm"><?php echo clg_rich($methods_title); ?></h2>
+        <p class="mt-md"><?php echo clg_rich($methods_text); ?></p>
+
+        <div style="display:grid; gap:20px; margin-top:40px;">
+          <div style="display:flex; gap:18px; align-items:flex-start; padding:24px; border:1px solid var(--line); border-radius:var(--radius-lg); background:var(--cream-50);">
+            <span style="width:48px; height:48px; border-radius:14px; background:var(--forest-700); color:var(--cream-100); display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16v12H4z"/><path d="M4 6l8 7 8-7"/></svg>
+            </span>
+            <div>
+              <p style="font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--forest-600); font-weight:600;"><?php echo esc_html($email_label); ?></p>
+              <h3 style="font-size:22px; margin-top:4px;"><a href="mailto:<?php echo esc_attr($email_value); ?>"><?php echo esc_html($email_value); ?></a></h3>
+              <p style="font-size:14px; color:var(--ink-500); margin-top:4px;"><?php echo esc_html($email_note); ?></p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:18px; align-items:flex-start; padding:24px; border:1px solid var(--line); border-radius:var(--radius-lg); background:var(--cream-50);">
+            <span style="width:48px; height:48px; border-radius:14px; background:var(--forest-700); color:var(--cream-100); display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            </span>
+            <div>
+              <p style="font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--forest-600); font-weight:600;"><?php echo esc_html($book_label); ?></p>
+              <h3 style="font-size:22px; margin-top:4px;"><?php echo esc_html($book_title); ?></h3>
+              <p style="font-size:14px; color:var(--ink-500); margin-top:4px;"><?php echo esc_html($book_note); ?></p>
+              <?php if ($book_btn_text) : ?>
+                <a href="<?php echo esc_url(clg_url($book_btn_url)); ?>" class="btn btn--ghost" style="margin-top:14px;"><?php echo esc_html($book_btn_text); ?> <span class="arrow">&rarr;</span></a>
+              <?php endif; ?>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:18px; align-items:flex-start; padding:24px; border:1px solid var(--line); border-radius:var(--radius-lg); background:var(--cream-50);">
+            <span style="width:48px; height:48px; border-radius:14px; background:var(--forest-700); color:var(--cream-100); display:inline-flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l9 4.5v7c0 4.5-4 9-9 10-5-1-9-5.5-9-10v-7L12 2z"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <div>
+              <p style="font-size:12px; letter-spacing:0.16em; text-transform:uppercase; color:var(--forest-600); font-weight:600;"><?php echo esc_html($area_label); ?></p>
+              <h3 style="font-size:22px; margin-top:4px;"><?php echo esc_html($area_title); ?></h3>
+              <p style="font-size:14px; color:var(--ink-500); margin-top:4px;"><?php echo esc_html($area_note); ?></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <form class="card" style="padding:clamp(28px, 3vw, 44px);" method="post" action="<?php echo esc_url($form_action); ?>" novalidate>
+          <span class="eyebrow"><?php echo esc_html($form_eyebrow); ?></span>
+          <h3 style="margin-top:14px; font-size:30px;"><?php echo clg_rich($form_title); ?></h3>
+          <p style="margin-top:8px; color:var(--ink-500);"><?php echo clg_rich($form_intro); ?></p>
+
+          <div style="margin-top:28px;">
+            <div class="form-field">
+              <label for="name"><?php echo esc_html($label_name); ?></label>
+              <input id="name" name="name" type="text" required autocomplete="name">
+            </div>
+            <div class="form-field">
+              <label for="email"><?php echo esc_html($label_email); ?></label>
+              <input id="email" name="email" type="email" required autocomplete="email">
+            </div>
+            <div class="form-field">
+              <label for="phone"><?php echo esc_html($label_phone); ?></label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel">
+            </div>
+            <div class="form-field">
+              <label for="interest"><?php echo esc_html($label_interest); ?></label>
+              <select id="interest" name="interest">
+                <?php foreach ($interest_opts as $opt) : ?>
+                  <option><?php echo esc_html($opt); ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="message"><?php echo esc_html($label_message); ?></label>
+              <textarea id="message" name="message" rows="5" required placeholder="<?php echo esc_attr($msg_placeholder); ?>"></textarea>
+            </div>
+
+            <input type="hidden" name="_subject" value="<?php echo esc_attr($form_subject); ?>">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="<?php echo esc_url($form_next); ?>">
+
+            <button type="submit" class="btn btn--primary" style="width:100%; justify-content:center;"><?php echo esc_html($submit_text); ?> <span class="arrow">&rarr;</span></button>
+            <p class="form-note"><?php echo clg_rich($form_note); ?></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="principles">
+  <div class="container">
+    <div class="reveal" style="text-align:center; max-width:640px; margin-inline:auto;">
+      <span class="eyebrow"><?php echo esc_html($cta_eyebrow); ?></span>
+      <h2 class="mt-sm"><?php echo clg_rich($cta_title); ?></h2>
+      <p class="mt-md"><?php echo clg_rich($cta_text); ?></p>
+      <?php if ($cta_btn_text) : ?>
+        <a href="<?php echo esc_url(clg_url($cta_btn_url)); ?>" class="btn btn--primary mt-md"><?php echo esc_html($cta_btn_text); ?> <span class="arrow">&rarr;</span></a>
+      <?php endif; ?>
+    </div>
+  </div>
+</section>
+
+<?php get_footer(); ?>

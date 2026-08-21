@@ -1,3 +1,18 @@
+/*
+Theme Name: Celeste Living
+Theme URI: https://celestelivinggroup.co.uk
+Author: JCL Marketing
+Author URI: https://www.orriq.com
+Description: Custom WordPress theme for Celeste Living Group — curated property and investor partnerships in Birmingham and Staffordshire. Every piece of content is editable via custom metaboxes. Self-contained: activation creates all pages, the navigation menu and front page automatically. Zero plugin dependencies.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.8
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: celeste-living
+*/
+
 /* ---------- Celeste Living Group — Core stylesheet ---------- */
 
 :root {
@@ -798,4 +813,19 @@ section { padding-block: clamp(72px, 9vw, 132px); }
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* ---------- Legal pages (from terms.html) ---------- */
+
+.legal h2 { margin-top: 48px; font-size: clamp(24px, 2.4vw, 32px); }
+.legal h3 { margin-top: 32px; font-size: 20px; }
+.legal p, .legal ul { margin-top: 14px; max-width: 68ch; }
+.legal ul { padding-left: 22px; }
+.legal li { margin-top: 6px; }
+
+/* ---------- WordPress admin bar offset (logged-in only) ---------- */
+
+body.admin-bar .site-header { top: 32px; }
+@media (max-width: 782px) {
+  body.admin-bar .site-header { top: 46px; }
 }
