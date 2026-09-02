@@ -337,7 +337,7 @@ function clg_about_defaults() {
         '_clg_about_social_title'    => 'Behind the scenes, in real time.',
         '_clg_about_social_text'     => 'We share progress as it happens — good days, imperfect days, and everything in between. No polished brand fluff.',
         '_clg_about_social_btn_text' => 'Follow on Instagram',
-        '_clg_about_social_btn_url'  => 'https://instagram.com',
+        '_clg_about_social_btn_url'  => 'https://www.instagram.com/celeste.livinggroup/',
         '_clg_about_sc1_image'       => 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80',
         '_clg_about_sc1_caption'     => 'Kitchen nearing completion — slim shaker, brushed brass, bone marble surround.',
         '_clg_about_sc2_image'       => 'https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=800&q=80',
