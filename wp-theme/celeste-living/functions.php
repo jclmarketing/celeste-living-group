@@ -233,8 +233,9 @@ function clg_form_recipient() {
 
 /**
  * Handle the contact form post.
- * Posts back to the contact page itself and mails through wp_mail(), so the
- * site's SMTP connection is used and nothing depends on a third-party relay.
+ * Posts back to the contact page itself, then hands the enquiry to the n8n
+ * workflow that formats and sends the email. Nothing depends on the web
+ * server being able to send mail.
  */
 add_action('template_redirect', 'clg_handle_contact_form');
 function clg_handle_contact_form() {
@@ -260,37 +261,42 @@ function clg_handle_contact_form() {
         exit;
     }
 
-    $to      = clg_form_recipient();
-    $subject = clg_meta(get_the_ID(), '_clg_contact_form_subject', 'New enquiry — Celeste Living Group website');
+    // Enquiries are delivered by the n8n workflow
+    // "Celeste Living Group — Website Enquiries" (webhook: /webhook/celeste-enquiry),
+    // which formats the email and sends it over the JCL SMTP connection.
+    $response = wp_remote_post(clg_enquiry_webhook(), array(
+        'timeout'  => 15,
+        'headers'  => array('Content-Type' => 'application/json'),
+        'body'     => wp_json_encode(array(
+            'to'       => clg_form_recipient(),
+            'name'     => $name,
+            'email'    => $email,
+            'phone'    => $phone,
+            'interest' => $interest,
+            'message'  => $message,
+            'page'     => wp_parse_url($back, PHP_URL_PATH),
+        )),
+    ));
 
-    $body  = "New enquiry from the Celeste Living Group website.\n\n";
-    $body .= "Name:      {$name}\n";
-    $body .= "Email:     {$email}\n";
-    if ($phone)    $body .= "Telephone: {$phone}\n";
-    if ($interest) $body .= "Enquiry:   {$interest}\n";
-    $body .= "\nMessage:\n{$message}\n";
-    $body .= "\n---\nSent from " . home_url('/') . " on " . current_time('j M Y, H:i') . "\n";
+    $code = wp_remote_retrieve_response_code($response);
+    $sent = !is_wp_error($response) && $code >= 200 && $code < 300;
 
-    $from    = clg_mail_from();
-    $headers = array(
-        'From: Celeste Living Group Website <' . $from . '>',
-        'Reply-To: ' . $name . ' <' . $email . '>',
-        'Content-Type: text/plain; charset=UTF-8',
-    );
-
-    $sent = wp_mail($to, $subject, $body, $headers);
+    if (!$sent) {
+        error_log('[celeste] enquiry webhook failed: ' . (is_wp_error($response)
+            ? $response->get_error_message()
+            : 'HTTP ' . $code . ' ' . wp_remote_retrieve_body($response)));
+    }
 
     wp_safe_redirect(add_query_arg($sent ? array('sent' => '1') : array('enquiry' => 'failed'), $back));
     exit;
 }
 
 /**
- * The address enquiries are sent FROM. Must be an address the SMTP
- * connection is allowed to send as.
+ * n8n webhook that formats and sends the enquiry email.
  */
-function clg_mail_from() {
-    $from = trim((string) get_option('clg_mail_from', ''));
-    return $from !== '' ? $from : 'jon@jclmarketing.co.uk';
+function clg_enquiry_webhook() {
+    $url = trim((string) get_option('clg_enquiry_webhook', ''));
+    return $url !== '' ? $url : 'https://n8n.jclmarketing.co.uk/webhook/celeste-enquiry';
 }
 
 // ===== INCLUDES =====
