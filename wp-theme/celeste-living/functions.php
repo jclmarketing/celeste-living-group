@@ -220,6 +220,79 @@ function clg_phone() {
     return trim((string) get_option('clg_phone', '0121 7989 081'));
 }
 
+// ===== CONTACT FORM =====
+
+/**
+ * Where enquiries go. Set in Appearance -> Celeste Settings.
+ */
+function clg_form_recipient() {
+    $to = trim((string) get_option('clg_form_recipient', ''));
+    if (!$to) $to = trim((string) get_option('clg_contact_email', 'info@celestelivinggroup.co.uk'));
+    return $to;
+}
+
+/**
+ * Handle the contact form post.
+ * Posts back to the contact page itself and mails through wp_mail(), so the
+ * site's SMTP connection is used and nothing depends on a third-party relay.
+ */
+add_action('template_redirect', 'clg_handle_contact_form');
+function clg_handle_contact_form() {
+    if (empty($_POST['clg_contact_submit'])) return;
+    if (!isset($_POST['clg_contact_nonce']) || !wp_verify_nonce($_POST['clg_contact_nonce'], 'clg_contact_form')) return;
+
+    $back = get_permalink(get_the_ID());
+
+    // Honeypot — bots fill it, humans never see it.
+    if (!empty($_POST['clg_website'])) {
+        wp_safe_redirect(add_query_arg('sent', '1', $back));
+        exit;
+    }
+
+    $name     = sanitize_text_field(wp_unslash($_POST['name'] ?? ''));
+    $email    = sanitize_email(wp_unslash($_POST['email'] ?? ''));
+    $phone    = sanitize_text_field(wp_unslash($_POST['phone'] ?? ''));
+    $interest = sanitize_text_field(wp_unslash($_POST['interest'] ?? ''));
+    $message  = sanitize_textarea_field(wp_unslash($_POST['message'] ?? ''));
+
+    if ($name === '' || !is_email($email) || $message === '') {
+        wp_safe_redirect(add_query_arg('enquiry', 'invalid', $back));
+        exit;
+    }
+
+    $to      = clg_form_recipient();
+    $subject = clg_meta(get_the_ID(), '_clg_contact_form_subject', 'New enquiry — Celeste Living Group website');
+
+    $body  = "New enquiry from the Celeste Living Group website.\n\n";
+    $body .= "Name:      {$name}\n";
+    $body .= "Email:     {$email}\n";
+    if ($phone)    $body .= "Telephone: {$phone}\n";
+    if ($interest) $body .= "Enquiry:   {$interest}\n";
+    $body .= "\nMessage:\n{$message}\n";
+    $body .= "\n---\nSent from " . home_url('/') . " on " . current_time('j M Y, H:i') . "\n";
+
+    $from    = clg_mail_from();
+    $headers = array(
+        'From: Celeste Living Group Website <' . $from . '>',
+        'Reply-To: ' . $name . ' <' . $email . '>',
+        'Content-Type: text/plain; charset=UTF-8',
+    );
+
+    $sent = wp_mail($to, $subject, $body, $headers);
+
+    wp_safe_redirect(add_query_arg($sent ? array('sent' => '1') : array('enquiry' => 'failed'), $back));
+    exit;
+}
+
+/**
+ * The address enquiries are sent FROM. Must be an address the SMTP
+ * connection is allowed to send as.
+ */
+function clg_mail_from() {
+    $from = trim((string) get_option('clg_mail_from', ''));
+    return $from !== '' ? $from : 'jon@jclmarketing.co.uk';
+}
+
 // ===== INCLUDES =====
 require_once get_template_directory() . '/inc/meta-boxes.php';
 require_once get_template_directory() . '/inc/theme-setup.php';

@@ -829,3 +829,23 @@ body.admin-bar .site-header { top: 32px; }
 @media (max-width: 782px) {
   body.admin-bar .site-header { top: 46px; }
 }
+
+/* ===== Contact form status messages ===== */
+.form-status {
+  margin: 22px 0 0;
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.form-status--ok {
+  background: var(--sage-100, #E8EFE8);
+  border: 1px solid var(--sage-300, #B7C9B7);
+  color: var(--forest-800, #123027);
+}
+.form-status--error {
+  background: #FBEDEA;
+  border: 1px solid #E2B4A9;
+  color: #8A2F1C;
+}
+.form-status a { text-decoration: underline; text-underline-offset: 3px; }

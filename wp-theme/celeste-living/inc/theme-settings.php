@@ -27,6 +27,8 @@ function clg_settings_fields() {
         'clg_footer_tagline'   => array('Footer Tagline', "Curated living & experiences.\nHonest property partnerships in Birmingham & Staffordshire.", 'textarea', 'New line = line break'),
         'clg_contact_email'    => array('Contact Email', 'info@celestelivinggroup.co.uk', 'text', 'Used in the footer and mailto links'),
         'clg_phone'            => array('Telephone Number', '0121 7989 081', 'text', 'Used for the click-to-call links in the header and on the contact page'),
+        'clg_form_recipient'   => array('Enquiry Recipient', 'info@celestelivinggroup.co.uk', 'text', 'Contact form enquiries are emailed here'),
+        'clg_mail_from'        => array('Send Enquiries From', 'jon@jclmarketing.co.uk', 'text', 'Must be an address the site\'s SMTP connection is allowed to send as'),
         'clg_area_line'        => array('Area Line (footer)', 'Birmingham & Staffordshire, UK', 'text'),
         'clg_instagram_url'    => array('Instagram URL', 'https://www.instagram.com/celeste.livinggroup/', 'text', 'Leave blank to hide'),
         'clg_instagram_label'  => array('Instagram Link Label (footer)', 'Instagram', 'text'),

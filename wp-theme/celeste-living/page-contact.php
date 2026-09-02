@@ -29,7 +29,6 @@ $area_title = clg_meta($pid, '_clg_contact_area_title', $d['_clg_contact_area_ti
 $area_note  = clg_meta($pid, '_clg_contact_area_note', $d['_clg_contact_area_note']);
 
 // === Form ===
-$form_action    = clg_meta($pid, '_clg_contact_form_action', $d['_clg_contact_form_action']);
 $form_eyebrow   = clg_meta($pid, '_clg_contact_form_eyebrow', $d['_clg_contact_form_eyebrow']);
 $form_title     = clg_meta($pid, '_clg_contact_form_title', $d['_clg_contact_form_title']);
 $form_intro     = clg_meta($pid, '_clg_contact_form_intro', $d['_clg_contact_form_intro']);
@@ -40,10 +39,8 @@ $label_interest = clg_meta($pid, '_clg_contact_label_interest', $d['_clg_contact
 $label_message  = clg_meta($pid, '_clg_contact_label_message', $d['_clg_contact_label_message']);
 $interest_opts  = clg_list(clg_meta($pid, '_clg_contact_interest_options', $d['_clg_contact_interest_options']));
 $msg_placeholder = clg_meta($pid, '_clg_contact_message_placeholder', $d['_clg_contact_message_placeholder']);
-$form_subject   = clg_meta($pid, '_clg_contact_form_subject', $d['_clg_contact_form_subject']);
 $submit_text    = clg_meta($pid, '_clg_contact_submit_text', $d['_clg_contact_submit_text']);
 $form_note      = clg_meta($pid, '_clg_contact_form_note', $d['_clg_contact_form_note']);
-$form_next      = add_query_arg('sent', '1', get_permalink($pid));
 
 // === Bottom CTA (light) ===
 $cta_eyebrow  = clg_meta($pid, '_clg_contact_cta_eyebrow', $d['_clg_contact_cta_eyebrow']);
@@ -110,10 +107,18 @@ get_template_part('template-parts/page-hero');
       </div>
 
       <div class="reveal">
-        <form class="card" style="padding:clamp(28px, 3vw, 44px);" method="post" action="<?php echo esc_url($form_action); ?>" novalidate>
+        <form class="card" style="padding:clamp(28px, 3vw, 44px);" method="post" action="<?php echo esc_url(get_permalink($pid)); ?>" novalidate>
           <span class="eyebrow"><?php echo esc_html($form_eyebrow); ?></span>
           <h3 style="margin-top:14px; font-size:30px;"><?php echo clg_rich($form_title); ?></h3>
           <p style="margin-top:8px; color:var(--ink-500);"><?php echo clg_rich($form_intro); ?></p>
+
+          <?php if (isset($_GET['sent'])) : ?>
+            <p class="form-status form-status--ok" role="status">Thank you &mdash; your message is on its way. We&rsquo;ll come back to you within one working day.</p>
+          <?php elseif (isset($_GET['enquiry']) && $_GET['enquiry'] === 'invalid') : ?>
+            <p class="form-status form-status--error" role="alert">Please add your name, a valid email address and a message, then send it again.</p>
+          <?php elseif (isset($_GET['enquiry']) && $_GET['enquiry'] === 'failed') : ?>
+            <p class="form-status form-status--error" role="alert">Something went wrong sending that. Please email us directly at <a href="mailto:<?php echo esc_attr($email_value); ?>"><?php echo esc_html($email_value); ?></a>.</p>
+          <?php endif; ?>
 
           <div style="margin-top:28px;">
             <div class="form-field">
@@ -141,9 +146,11 @@ get_template_part('template-parts/page-hero');
               <textarea id="message" name="message" rows="5" required placeholder="<?php echo esc_attr($msg_placeholder); ?>"></textarea>
             </div>
 
-            <input type="hidden" name="_subject" value="<?php echo esc_attr($form_subject); ?>">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="<?php echo esc_url($form_next); ?>">
+            <?php wp_nonce_field('clg_contact_form', 'clg_contact_nonce'); ?>
+            <input type="hidden" name="clg_contact_submit" value="1">
+            <p style="position:absolute; left:-9999px;" aria-hidden="true">
+              <label>Website<input type="text" name="clg_website" tabindex="-1" autocomplete="off"></label>
+            </p>
 
             <button type="submit" class="btn btn--primary" style="width:100%; justify-content:center;"><?php echo esc_html($submit_text); ?> <span class="arrow">&rarr;</span></button>
             <p class="form-note"><?php echo clg_rich($form_note); ?></p>

@@ -499,7 +499,6 @@ function clg_contact_defaults() {
         '_clg_contact_area_title'   => 'Birmingham & Staffordshire',
         '_clg_contact_area_note'    => 'Happy to meet in person for serious conversations.',
 
-        '_clg_contact_form_action'  => 'https://formsubmit.co/info@celestelivinggroup.co.uk',
         '_clg_contact_form_eyebrow' => 'Send a message',
         '_clg_contact_form_title'   => "We'll get back to you properly.",
         '_clg_contact_form_intro'   => 'Not a templated reply — an actual answer from either Bruno or Kirstie.',
@@ -1036,7 +1035,7 @@ function clg_metabox_contact($post) {
     clg_field_text($pid, '_clg_contact_area_note', 'Note', $d['_clg_contact_area_note']);
 
     echo '<hr><h3>Message Form</h3>';
-    clg_field_text($pid, '_clg_contact_form_action', 'Form Action URL', $d['_clg_contact_form_action'], 'FormSubmit endpoint — change the email after the last slash to change the recipient');
+    echo '<p class="description">Enquiries are emailed to the address set in <strong>Appearance &rarr; Celeste Settings &rarr; Enquiry Recipient</strong>.</p>';
     clg_field_text($pid, '_clg_contact_form_eyebrow', 'Form Eyebrow', $d['_clg_contact_form_eyebrow']);
     clg_field_text($pid, '_clg_contact_form_title', 'Form Title', $d['_clg_contact_form_title']);
     clg_field_textarea($pid, '_clg_contact_form_intro', 'Form Intro', $d['_clg_contact_form_intro'], 2);
@@ -1156,7 +1155,7 @@ function clg_save_all_meta($post_id) {
         '_clg_contact_book_label', '_clg_contact_book_title', '_clg_contact_book_note', '_clg_contact_book_tel',
         '_clg_contact_book_btn_text', '_clg_contact_book_btn_url',
         '_clg_contact_area_label', '_clg_contact_area_title', '_clg_contact_area_note',
-        '_clg_contact_form_action', '_clg_contact_form_eyebrow', '_clg_contact_form_title', '_clg_contact_form_intro',
+        '_clg_contact_form_eyebrow', '_clg_contact_form_title', '_clg_contact_form_intro',
         '_clg_contact_label_name', '_clg_contact_label_email', '_clg_contact_label_phone',
         '_clg_contact_label_interest', '_clg_contact_label_message',
         '_clg_contact_interest_options', '_clg_contact_message_placeholder',
