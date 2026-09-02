@@ -299,6 +299,24 @@ function clg_enquiry_webhook() {
     return $url !== '' ? $url : 'https://n8n.jclmarketing.co.uk/webhook/celeste-enquiry';
 }
 
+// ===== SITEMAP STATUS =====
+
+/**
+ * Serve the core XML sitemap with a 200.
+ *
+ * WP::handle_404() only skips the 404 when the main query found posts. This
+ * site is all pages and no posts, so a sitemap request renders correct XML
+ * but under a 404 status header, which search engines reject. Short-circuit
+ * the 404 handling for sitemap requests only.
+ */
+add_filter('pre_handle_404', 'clg_sitemap_not_404', 10, 2);
+function clg_sitemap_not_404($preempt, $wp_query) {
+    if ($wp_query->get('sitemap') || $wp_query->get('sitemap-stylesheet')) {
+        return true;
+    }
+    return $preempt;
+}
+
 // ===== INCLUDES =====
 require_once get_template_directory() . '/inc/meta-boxes.php';
 require_once get_template_directory() . '/inc/theme-setup.php';
