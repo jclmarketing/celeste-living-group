@@ -240,9 +240,15 @@ function clg_form_recipient() {
 add_action('template_redirect', 'clg_handle_contact_form');
 function clg_handle_contact_form() {
     if (empty($_POST['clg_contact_submit'])) return;
-    if (!isset($_POST['clg_contact_nonce']) || !wp_verify_nonce($_POST['clg_contact_nonce'], 'clg_contact_form')) return;
 
     $back = get_permalink(get_the_ID());
+
+    // A stale nonce means the page was served from cache for longer than the
+    // nonce lives. Say so, rather than silently doing nothing.
+    if (!isset($_POST['clg_contact_nonce']) || !wp_verify_nonce($_POST['clg_contact_nonce'], 'clg_contact_form')) {
+        wp_safe_redirect(add_query_arg('enquiry', 'expired', $back));
+        exit;
+    }
 
     // Honeypot — bots fill it, humans never see it.
     if (!empty($_POST['clg_website'])) {

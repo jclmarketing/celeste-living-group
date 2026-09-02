@@ -116,6 +116,8 @@ get_template_part('template-parts/page-hero');
             <p class="form-status form-status--ok" role="status">Thank you &mdash; your message is on its way. We&rsquo;ll come back to you within one working day.</p>
           <?php elseif (isset($_GET['enquiry']) && $_GET['enquiry'] === 'invalid') : ?>
             <p class="form-status form-status--error" role="alert">Please add your name, a valid email address and a message, then send it again.</p>
+          <?php elseif (isset($_GET['enquiry']) && $_GET['enquiry'] === 'expired') : ?>
+            <p class="form-status form-status--error" role="alert">That form had been open a while and the page expired. Please reload and send it again.</p>
           <?php elseif (isset($_GET['enquiry']) && $_GET['enquiry'] === 'failed') : ?>
             <p class="form-status form-status--error" role="alert">Something went wrong sending that. Please email us directly at <a href="mailto:<?php echo esc_attr($email_value); ?>"><?php echo esc_html($email_value); ?></a>.</p>
           <?php endif; ?>
