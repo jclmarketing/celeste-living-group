@@ -154,7 +154,7 @@ function clg_hero_defaults($slug) {
         'contact' => array(
             'breadcrumb' => 'Contact',
             'title'      => 'Start a conversation.',
-            'lead'       => 'Drop us a note, send an email, or book a call. We reply to every genuine enquiry — usually within one working day.',
+            'lead'       => 'Drop us a note, send an email, or give us a call. We reply to every genuine enquiry — usually within one working day.',
             'btn1_text'  => '', 'btn1_url' => '', 'btn2_text' => '', 'btn2_url' => '',
         ),
         'terms' => array(
@@ -180,15 +180,15 @@ function clg_cta_defaults($slug) {
             'title'     => 'Ready to see how we work, quietly and properly?',
             'title_max' => '20ch',
             'text'      => "Whether you're an investor, a landlord in transition, or someone exploring their first property partnership — we'd rather have a proper chat than send a brochure.",
-            'btn1_text' => 'Get in touch', 'btn1_url' => '/contact/',
-            'btn2_text' => 'Book an intro call', 'btn2_url' => '/customer-journey/',
+                'btn1_text' => 'Get in touch', 'btn1_url' => '/contact/',
+            'btn2_text' => 'Call us', 'btn2_url' => clg_tel_href(clg_phone()) ? 'tel:' . clg_tel_href(clg_phone()) : '/contact/',
         ),
         'about' => array(
             'eyebrow'   => 'Say hello',
             'title'     => 'Start with a conversation, not a sales pitch.',
             'title_max' => '22ch',
             'text'      => "Thirty minutes. No pressure. See if there's a fit — that's all the first call is for.",
-            'btn1_text' => 'Book an intro call', 'btn1_url' => '/customer-journey/#book',
+            'btn1_text' => 'Call us', 'btn1_url' => clg_tel_href(clg_phone()) ? 'tel:' . clg_tel_href(clg_phone()) : '/contact/',
             'btn2_text' => 'Send us a message', 'btn2_url' => '/contact/',
         ),
         'property-management' => array(
@@ -220,7 +220,7 @@ function clg_home_defaults() {
         '_clg_home_hero_title'     => "Honest property.\n[it]Considered[/it] partnerships.",
         '_clg_home_hero_lead'      => "We source deals and run property flips with the patience of people playing the long game — because that's exactly what we are. No inflated numbers. No guru language. If a deal doesn't stack, we walk.",
         '_clg_home_hero_btn1_text' => 'See how we work',
-        '_clg_home_hero_btn1_url'  => '/customer-journey/',
+        '_clg_home_hero_btn1_url'  => '/about/',
         '_clg_home_hero_btn2_text' => 'Meet Bruno & Kirstie',
         '_clg_home_hero_btn2_url'  => '/about/',
         '_clg_home_hero_stats'     => array(
@@ -328,8 +328,8 @@ function clg_about_defaults() {
         '_clg_about_build_title'     => 'One good project. Then another. Then scale — properly.',
         '_clg_about_build_para'      => "Not quickly. We're documenting the journey honestly as we go, filters off — including the parts that don't go perfectly. If you're an investor, a deal sourcer, or a trade in Birmingham or Staffordshire, we're always happy to talk — even if there's nothing to work on together yet. Connections tend to pay off eventually.",
         '_clg_about_build_quote'     => "If you want hype, we're probably not your people. If you want honesty and someone who'll actually show up — that's us.",
-        '_clg_about_build_btn1_text' => 'Property management',
-        '_clg_about_build_btn1_url'  => '/property-management/',
+        '_clg_about_build_btn1_text' => '',
+        '_clg_about_build_btn1_url'  => '',
         '_clg_about_build_btn2_text' => 'Start a conversation',
         '_clg_about_build_btn2_url'  => '/contact/',
 
@@ -489,11 +489,12 @@ function clg_contact_defaults() {
         '_clg_contact_email_label'  => 'Email',
         '_clg_contact_email_value'  => 'info@celestelivinggroup.co.uk',
         '_clg_contact_email_note'   => 'The fastest route for general questions.',
-        '_clg_contact_book_label'   => 'Book a call',
-        '_clg_contact_book_title'   => '30-minute intro',
-        '_clg_contact_book_note'    => 'Pick a slot that works for you — no pressure.',
-        '_clg_contact_book_btn_text'=> 'Open booking',
-        '_clg_contact_book_btn_url' => '/customer-journey/#book',
+        '_clg_contact_book_label'   => 'Telephone',
+        '_clg_contact_book_title'   => clg_phone(),
+        '_clg_contact_book_note'    => '',
+        '_clg_contact_book_tel'     => '',
+        '_clg_contact_book_btn_text'=> '',
+        '_clg_contact_book_btn_url' => '',
         '_clg_contact_area_label'   => 'Area',
         '_clg_contact_area_title'   => 'Birmingham & Staffordshire',
         '_clg_contact_area_note'    => 'Happy to meet in person for serious conversations.',
@@ -516,8 +517,8 @@ function clg_contact_defaults() {
         '_clg_contact_cta_eyebrow'  => 'Prefer a conversation?',
         '_clg_contact_cta_title'    => 'Sometimes a 30-minute call beats ten emails.',
         '_clg_contact_cta_text'     => "Pick a slot, bring your questions, leave with clear answers. We'll never use the call to push you into anything.",
-        '_clg_contact_cta_btn_text' => 'Book a call',
-        '_clg_contact_cta_btn_url'  => '/customer-journey/#book',
+        '_clg_contact_cta_btn_text' => 'Call us',
+        '_clg_contact_cta_btn_url'  => clg_tel_href(clg_phone()) ? 'tel:' . clg_tel_href(clg_phone()) : '/contact/',
     );
 }
 
@@ -648,6 +649,79 @@ function clg_register_meta_boxes() {
     if (in_array($slug, array('home', 'about', 'property-management', 'compliance'), true)) {
         add_meta_box('clg_cta_banner', 'CTA Banner (dark green, bottom of page)', 'clg_metabox_cta', 'page', 'normal', 'default');
     }
+
+    // Section visibility — which sections of this page are shown on the live site
+    if (clg_page_sections($slug)) {
+        add_meta_box('clg_visibility', 'Section Visibility', 'clg_metabox_visibility', 'page', 'side', 'high');
+    }
+}
+
+/**
+ * Section Visibility meta box.
+ * Ticked = the section is hidden on the live site. The content stays here,
+ * untouched, so it can be switched back on once it is finished.
+ */
+function clg_metabox_visibility($post) {
+    clg_nonce_once();
+    $sections = clg_page_sections(get_post_field('post_name', $post->ID));
+    if (!$sections) return;
+
+    echo '<p class="description">Tick a section to hide it on the live site. Nothing is deleted &mdash; the content stays in the fields below and comes straight back when you untick it.</p>';
+    echo '<input type="hidden" name="clg_visibility_keys" value="' . esc_attr(implode(',', array_keys($sections))) . '" />';
+
+    foreach ($sections as $key => $label) {
+        $hidden = clg_section_hidden($post->ID, $key);
+        echo '<p style="margin:10px 0;padding:8px 10px;border-radius:4px;border:1px solid ' . ($hidden ? '#d63638' : '#dcdcde') . ';background:' . ($hidden ? '#fcf0f1' : '#fff') . ';">';
+        echo '<label><input type="checkbox" name="_clg_hide_' . esc_attr($key) . '" value="1" ' . checked($hidden, true, false) . ' /> ';
+        echo '<strong>' . esc_html($label) . '</strong></label>';
+        if ($hidden) echo '<br><span style="color:#d63638;font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;">Hidden on the live site</span>';
+        echo '</p>';
+    }
+}
+
+/**
+ * Admin notice listing the sections currently hidden on the page being edited.
+ */
+add_action('admin_notices', 'clg_hidden_sections_notice');
+function clg_hidden_sections_notice() {
+    $screen = get_current_screen();
+    if (!$screen || $screen->base !== 'post' || $screen->post_type !== 'page') return;
+
+    $post_id = isset($_GET['post']) ? intval($_GET['post']) : 0;
+    if (!$post_id) return;
+
+    $sections = clg_page_sections(get_post_field('post_name', $post_id));
+    $hidden   = array();
+    foreach ($sections as $key => $label) {
+        if (clg_section_hidden($post_id, $key)) $hidden[] = $label;
+    }
+    if (!$hidden) return;
+
+    echo '<div class="notice notice-warning"><p><strong>' . count($hidden) . ' section' . (count($hidden) === 1 ? ' is' : 's are') . ' hidden on the live site:</strong> ';
+    echo esc_html(implode(' &middot; ', $hidden));
+    echo '<br>Finish the content, then untick it in <em>Section Visibility</em> (right-hand column) to publish it.</p></div>';
+}
+
+/**
+ * "Hidden sections" column on the Pages list.
+ */
+add_filter('manage_page_posts_columns', 'clg_pages_hidden_column');
+function clg_pages_hidden_column($cols) {
+    $cols['clg_hidden'] = 'Hidden sections';
+    return $cols;
+}
+
+add_action('manage_page_posts_custom_column', 'clg_pages_hidden_column_content', 10, 2);
+function clg_pages_hidden_column_content($col, $post_id) {
+    if ($col !== 'clg_hidden') return;
+    $sections = clg_page_sections(get_post_field('post_name', $post_id));
+    $hidden   = array();
+    foreach ($sections as $key => $label) {
+        if (clg_section_hidden($post_id, $key)) $hidden[] = $label;
+    }
+    echo $hidden
+        ? '<span style="color:#d63638;font-weight:600;">' . count($hidden) . ' hidden</span><br><span class="description">' . esc_html(implode(', ', $hidden)) . '</span>'
+        : '<span class="description">&mdash;</span>';
 }
 
 
@@ -949,12 +1023,13 @@ function clg_metabox_contact($post) {
     clg_field_text($pid, '_clg_contact_email_label', 'Label', $d['_clg_contact_email_label']);
     clg_field_text($pid, '_clg_contact_email_value', 'Email Address', $d['_clg_contact_email_value']);
     clg_field_text($pid, '_clg_contact_email_note', 'Note', $d['_clg_contact_email_note']);
-    echo '<h4>Card 2 — Book a Call</h4>';
+    echo '<h4>Card 2 — Telephone</h4>';
     clg_field_text($pid, '_clg_contact_book_label', 'Label', $d['_clg_contact_book_label']);
-    clg_field_text($pid, '_clg_contact_book_title', 'Title', $d['_clg_contact_book_title']);
+    clg_field_text($pid, '_clg_contact_book_title', 'Phone Number (shown)', $d['_clg_contact_book_title'], 'Displayed as written, e.g. 0121 7989 081');
+    clg_field_text($pid, '_clg_contact_book_tel', 'Click-to-Call Number (optional)', $d['_clg_contact_book_tel'], 'Leave blank to dial the number above. Use international format for a different number, e.g. +441217989081');
     clg_field_text($pid, '_clg_contact_book_note', 'Note', $d['_clg_contact_book_note']);
-    clg_field_text($pid, '_clg_contact_book_btn_text', 'Button Text', $d['_clg_contact_book_btn_text']);
-    clg_field_text($pid, '_clg_contact_book_btn_url', 'Button URL', $d['_clg_contact_book_btn_url']);
+    clg_field_text($pid, '_clg_contact_book_btn_text', 'Extra Button Text (optional)', $d['_clg_contact_book_btn_text'], 'Leave blank — the phone number itself is the click-to-call link');
+    clg_field_text($pid, '_clg_contact_book_btn_url', 'Extra Button URL (optional)', $d['_clg_contact_book_btn_url']);
     echo '<h4>Card 3 — Area</h4>';
     clg_field_text($pid, '_clg_contact_area_label', 'Label', $d['_clg_contact_area_label']);
     clg_field_text($pid, '_clg_contact_area_title', 'Title', $d['_clg_contact_area_title']);
@@ -1078,7 +1153,7 @@ function clg_save_all_meta($post_id) {
         // Contact
         '_clg_contact_methods_eyebrow', '_clg_contact_methods_title', '_clg_contact_methods_text',
         '_clg_contact_email_label', '_clg_contact_email_value', '_clg_contact_email_note',
-        '_clg_contact_book_label', '_clg_contact_book_title', '_clg_contact_book_note',
+        '_clg_contact_book_label', '_clg_contact_book_title', '_clg_contact_book_note', '_clg_contact_book_tel',
         '_clg_contact_book_btn_text', '_clg_contact_book_btn_url',
         '_clg_contact_area_label', '_clg_contact_area_title', '_clg_contact_area_note',
         '_clg_contact_form_action', '_clg_contact_form_eyebrow', '_clg_contact_form_title', '_clg_contact_form_intro',
@@ -1098,6 +1173,18 @@ function clg_save_all_meta($post_id) {
     foreach ($text_fields as $key) {
         if (isset($_POST[$key])) {
             update_post_meta($post_id, $key, sanitize_textarea_field(wp_unslash($_POST[$key])));
+        }
+    }
+
+    // ----- Section visibility checkboxes -----
+    if (isset($_POST['clg_visibility_keys'])) {
+        $keys = array_filter(array_map('sanitize_key', explode(',', wp_unslash($_POST['clg_visibility_keys']))));
+        foreach ($keys as $key) {
+            if (!empty($_POST['_clg_hide_' . $key])) {
+                update_post_meta($post_id, '_clg_hide_' . $key, '1');
+            } else {
+                delete_post_meta($post_id, '_clg_hide_' . $key);
+            }
         }
     }
 

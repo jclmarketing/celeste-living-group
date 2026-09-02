@@ -90,6 +90,7 @@ $how_btn_url  = clg_meta($pid, '_clg_home_how_btn_url', $d['_clg_home_how_btn_ur
   </div>
 </section>
 
+<?php if (clg_show_section($pid, 'home_wwd')) : ?>
 <!-- WHAT WE DO -->
 <section>
   <div class="container">
@@ -115,6 +116,9 @@ $how_btn_url  = clg_meta($pid, '_clg_home_how_btn_url', $d['_clg_home_how_btn_ur
   </div>
 </section>
 
+<?php endif; ?>
+
+<?php if (clg_show_section($pid, 'home_prin')) : ?>
 <!-- PRINCIPLES -->
 <section class="principles">
   <div class="container">
@@ -138,6 +142,9 @@ $how_btn_url  = clg_meta($pid, '_clg_home_how_btn_url', $d['_clg_home_how_btn_ur
   </div>
 </section>
 
+<?php endif; ?>
+
+<?php if (clg_show_section($pid, 'home_quote')) : ?>
 <!-- IMAGE / QUOTE -->
 <section>
   <div class="container">
@@ -159,6 +166,9 @@ $how_btn_url  = clg_meta($pid, '_clg_home_how_btn_url', $d['_clg_home_how_btn_ur
   </div>
 </section>
 
+<?php endif; ?>
+
+<?php if (clg_show_section($pid, 'home_how')) : ?>
 <!-- HOW IT WORKS (preview) -->
 <section class="principles">
   <div class="container">
@@ -188,7 +198,9 @@ $how_btn_url  = clg_meta($pid, '_clg_home_how_btn_url', $d['_clg_home_how_btn_ur
   </div>
 </section>
 
+<?php endif; ?>
+
 <!-- CTA -->
-<?php get_template_part('template-parts/cta-banner'); ?>
+<?php if (clg_show_section($pid, 'home_cta')) get_template_part('template-parts/cta-banner'); ?>
 
 <?php get_footer(); ?>

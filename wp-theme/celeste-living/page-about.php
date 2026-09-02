@@ -71,6 +71,7 @@ $social_note = clg_meta($pid, '_clg_about_social_note', $d['_clg_about_social_no
 get_template_part('template-parts/page-hero');
 ?>
 
+<?php if (clg_show_section($pid, 'about_why')) : ?>
 <!-- WHY PROPERTY -->
 <section>
   <div class="container">
@@ -87,6 +88,9 @@ get_template_part('template-parts/page-hero');
   </div>
 </section>
 
+<?php endif; ?>
+
+<?php if (clg_show_section($pid, 'about_founders')) : ?>
 <!-- FOUNDERS -->
 <section class="principles">
   <div class="container">
@@ -111,6 +115,9 @@ get_template_part('template-parts/page-hero');
   </div>
 </section>
 
+<?php endif; ?>
+
+<?php if (clg_show_section($pid, 'about_where')) : ?>
 <!-- WHERE WE WORK -->
 <section>
   <div class="container">
@@ -121,6 +128,7 @@ get_template_part('template-parts/page-hero');
         <p class="mt-md"><?php echo clg_rich($where_text); ?></p>
         <div class="hero__meta" style="margin-top:40px;">
           <?php foreach ($where_stats as $stat) : ?>
+          <?php if (trim(isset($stat['number']) ? $stat['number'] : '') === '') continue; ?>
           <div><strong><?php echo esc_html(isset($stat['number']) ? $stat['number'] : ''); ?></strong><span><?php echo esc_html(isset($stat['label']) ? $stat['label'] : ''); ?></span></div>
           <?php endforeach; ?>
         </div>
@@ -132,6 +140,9 @@ get_template_part('template-parts/page-hero');
   </div>
 </section>
 
+<?php endif; ?>
+
+<?php if (clg_show_section($pid, 'about_how')) : ?>
 <!-- HOW WE WORK -->
 <section class="principles">
   <div class="container">
@@ -155,6 +166,9 @@ get_template_part('template-parts/page-hero');
   </div>
 </section>
 
+<?php endif; ?>
+
+<?php if (clg_show_section($pid, 'about_build')) : ?>
 <!-- WHAT WE'RE BUILDING -->
 <section>
   <div class="container">
@@ -180,6 +194,9 @@ get_template_part('template-parts/page-hero');
   </div>
 </section>
 
+<?php endif; ?>
+
+<?php if (clg_show_section($pid, 'about_social')) : ?>
 <!-- SOCIAL -->
 <section class="principles">
   <div class="container">
@@ -215,7 +232,9 @@ get_template_part('template-parts/page-hero');
   </div>
 </section>
 
+<?php endif; ?>
+
 <!-- CTA -->
-<?php get_template_part('template-parts/cta-banner'); ?>
+<?php if (clg_show_section($pid, 'about_cta')) get_template_part('template-parts/cta-banner'); ?>
 
 <?php get_footer(); ?>

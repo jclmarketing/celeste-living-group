@@ -139,7 +139,10 @@ function clg_nav_cta() {
         if ($slug === 'customer-journey') {
             $defaults = array('label' => 'Book a call', 'url' => '#book');
         } elseif ($slug === 'contact') {
-            $defaults = array('label' => 'Book a call', 'url' => '/customer-journey/#book');
+            $tel = clg_tel_href(clg_phone());
+            $defaults = $tel
+                ? array('label' => 'Call us', 'url' => 'tel:' . $tel)
+                : array('label' => 'Work with us', 'url' => '/contact/');
         }
         $label = clg_meta($pid, '_clg_nav_cta_label', $defaults['label']);
         $url   = clg_meta($pid, '_clg_nav_cta_url', $defaults['url']);
@@ -147,6 +150,74 @@ function clg_nav_cta() {
     }
 
     return $defaults;
+}
+
+// ===== SECTION VISIBILITY =====
+
+/**
+ * Registry of toggleable sections, per page template slug.
+ * Key => admin label. Used by the "Section Visibility" meta box and by the
+ * page templates, so the two can never drift apart.
+ */
+function clg_page_sections($slug) {
+    $map = array(
+        'home' => array(
+            'home_wwd'  => 'What we do (three cards)',
+            'home_prin' => 'Principles (numbered rows)',
+            'home_quote'=> 'Image / quote',
+            'home_how'  => 'How it works (steps preview)',
+            'home_cta'  => 'Closing CTA banner',
+        ),
+        'about' => array(
+            'about_why'      => 'Why property',
+            'about_founders' => 'Founders (Bruno & Kirstie cards)',
+            'about_where'    => 'Where we work',
+            'about_how'      => 'How we work (values)',
+            'about_build'    => "What we're building",
+            'about_social'   => 'Social feed',
+            'about_cta'      => 'Closing CTA banner',
+        ),
+        'contact' => array(
+            'contact_methods' => 'Contact methods + form',
+            'contact_cta'     => 'Closing CTA banner',
+        ),
+    );
+    return isset($map[$slug]) ? $map[$slug] : array();
+}
+
+/**
+ * Is a section hidden on the front end?
+ * Stored per page as _clg_hide_{key} = '1'.
+ */
+function clg_section_hidden($post_id, $key) {
+    return get_post_meta($post_id, '_clg_hide_' . $key, true) === '1';
+}
+
+/** Convenience inverse, for readability in templates. */
+function clg_show_section($post_id, $key) {
+    return !clg_section_hidden($post_id, $key);
+}
+
+/**
+ * Normalise a display phone number into a tel: href value.
+ * Returns '' when the value clearly is not a phone number, so callers can
+ * fall back to plain text.
+ */
+function clg_tel_href($number) {
+    $raw = trim((string) $number);
+    if ($raw === '') return '';
+    $plus = (strpos($raw, '+') === 0);
+    $digits = preg_replace('/\D+/', '', $raw);
+    if (strlen($digits) < 9) return '';           // not a phone number
+    if (!$plus && strpos($digits, '0') === 0) {   // UK national -> E.164
+        return '+44' . substr($digits, 1);
+    }
+    return ($plus ? '+' : '') . $digits;
+}
+
+/** Site-wide telephone number (Appearance -> Celeste Settings). */
+function clg_phone() {
+    return trim((string) get_option('clg_phone', '0121 7989 081'));
 }
 
 // ===== INCLUDES =====
