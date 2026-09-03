@@ -52,10 +52,10 @@ function clg_admin_assets($hook) {
 }
 add_action('admin_enqueue_scripts', 'clg_admin_assets');
 
-// ===== FAVICON FALLBACK (theme mark.svg when no Site Icon is set) =====
+// ===== FAVICON FALLBACK (theme mark.png when no Site Icon is set) =====
 function clg_favicon() {
     if (!has_site_icon()) {
-        echo '<link rel="icon" type="image/svg+xml" href="' . esc_url(get_template_directory_uri() . '/images/mark.svg') . '">' . "\n";
+        echo '<link rel="icon" type="image/png" href="' . esc_url(get_template_directory_uri() . '/images/mark.png') . '">' . "\n";
     }
     echo '<meta name="theme-color" content="#1B4332">' . "\n";
 }

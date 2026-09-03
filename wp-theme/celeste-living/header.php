@@ -20,7 +20,7 @@ $clg_nav_cta    = clg_nav_cta();
   <div class="container">
     <nav class="nav" id="nav">
       <a href="<?php echo esc_url(home_url('/')); ?>" class="nav__brand" aria-label="<?php echo esc_attr($clg_brand_name . ' ' . $clg_brand_sub); ?> — home">
-        <img src="<?php echo esc_url(get_template_directory_uri() . '/images/mark.svg'); ?>" alt="" aria-hidden="true">
+        <img src="<?php echo esc_url(get_template_directory_uri() . '/images/mark.png'); ?>" alt="" aria-hidden="true" width="512" height="512">
         <span><?php echo esc_html($clg_brand_name); ?><small><?php echo esc_html($clg_brand_sub); ?></small></span>
       </a>
       <div class="nav__links">

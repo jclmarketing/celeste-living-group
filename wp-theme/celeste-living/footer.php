@@ -1,7 +1,7 @@
 <?php
 $clg_brand_name       = get_option('clg_brand_name', 'Celeste');
 $clg_footer_brand_sub = get_option('clg_footer_brand_sub', 'LIVING GROUP');
-$clg_footer_tagline   = get_option('clg_footer_tagline', "Curated living & experiences.\nHonest property partnerships in Birmingham & Staffordshire.");
+$clg_footer_tagline   = get_option('clg_footer_tagline', "Honest property partnerships in Birmingham & Staffordshire.");
 $clg_contact_email    = get_option('clg_contact_email', 'info@celestelivinggroup.co.uk');
 $clg_area_line        = get_option('clg_area_line', 'Birmingham & Staffordshire, UK');
 $clg_instagram        = get_option('clg_instagram_url', 'https://www.instagram.com/celeste.livinggroup/');
@@ -22,7 +22,10 @@ $clg_terms_page       = get_page_by_path('terms');
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="footer-brand"><?php echo esc_html($clg_brand_name); ?><small><?php echo esc_html($clg_footer_brand_sub); ?></small></div>
+        <div class="footer-brand">
+          <img src="<?php echo esc_url(get_template_directory_uri() . '/images/mark-light.png'); ?>" alt="" aria-hidden="true" width="512" height="512">
+          <span><?php echo esc_html($clg_brand_name); ?><small><?php echo esc_html($clg_footer_brand_sub); ?></small></span>
+        </div>
         <p><?php echo clg_rich($clg_footer_tagline); ?></p>
       </div>
       <div>

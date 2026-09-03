@@ -30,7 +30,7 @@ $cs_phone_href = 'tel:' . preg_replace('/[^0-9+]/', '', '+44' . ltrim(preg_repla
 <meta name="theme-color" content="#1B4332">
 <meta name="robots" content="noindex, nofollow">
 <title><?php echo esc_html($cs_brand_name . ' ' . $cs_brand_sub); ?> — <?php echo esc_html($cs_eyebrow); ?></title>
-<link rel="icon" type="image/svg+xml" href="<?php echo esc_url(get_template_directory_uri() . '/images/mark.svg'); ?>">
+<link rel="icon" type="image/png" href="<?php echo esc_url(get_template_directory_uri() . '/images/mark.png'); ?>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
