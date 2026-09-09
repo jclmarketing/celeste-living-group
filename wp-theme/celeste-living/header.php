@@ -52,4 +52,5 @@ $clg_nav_cta    = clg_nav_cta();
       'depth'          => 1,
   ));
   ?>
+  <a href="<?php echo esc_url(clg_url($clg_nav_cta['url'])); ?>" class="btn btn--primary mobile-menu__cta"><?php echo esc_html($clg_nav_cta['label']); ?> <span class="arrow">&rarr;</span></a>
 </div>
